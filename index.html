@@ -730,6 +730,43 @@
       .testimoni-grid { grid-template-columns: 1fr; }
     }
 
+
+    /* ── KESEHARIAN ── */
+    .keseharian { background: var(--white); }
+
+    .keseharian-widget {
+      margin-top: 48px;
+    }
+
+    .keseharian-footer {
+      text-align: center;
+      margin-top: 36px;
+    }
+
+    .keseharian-footer a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy);
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .keseharian-footer a:hover {
+      background: var(--gold);
+      color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    .keseharian-footer a svg {
+      width: 18px; height: 18px;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       nav { padding: 0 24px; }
@@ -1016,6 +1053,37 @@
             <p>An alumni testimony that reflects our commitment to academic excellence and character building. Proud of our graduates and the impact they continue to make.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KESEHARIAN -->
+  <section class="section keseharian" id="keseharian">
+    <div class="section-inner">
+      <span class="section-eyebrow">Kehidupan di Pah Tsung</span>
+      <div class="gold-divider"></div>
+      <h2 class="section-title">Keseharian Kami</h2>
+      <p class="section-body" style="max-width:580px">
+        Intip momen-momen berharga sehari-hari di Pah Tsung School — dari kegiatan belajar, ekstrakurikuler, hingga perayaan budaya yang penuh warna.
+      </p>
+      <div class="keseharian-widget">
+        <behold-widget feed-id="sdCODvB84gOD4YhyFzDX"></behold-widget>
+        <script>
+          (() => {
+            const d=document,s=d.createElement("script");s.type="module";
+            s.src="https://w.behold.so/widget.js";d.head.append(s);
+          })();
+        </script>
+      </div>
+      <div class="keseharian-footer">
+        <a href="https://www.instagram.com/pahtsung.school" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+          Lihat Selengkapnya di Instagram
+        </a>
       </div>
     </div>
   </section>
