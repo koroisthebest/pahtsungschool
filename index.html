@@ -659,6 +659,77 @@
       border-radius: 2px;
     }
 
+
+    /* ── TESTIMONI ── */
+    .testimoni { background: var(--off-white); }
+
+    .testimoni-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+
+    .testimoni-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(13,34,64,0.07);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .testimoni-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 32px rgba(13,34,64,0.13);
+    }
+
+    .testimoni-video {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 */
+      background: var(--navy);
+    }
+
+    .testimoni-video iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .testimoni-caption {
+      padding: 20px 24px;
+    }
+
+    .testimoni-caption h4 {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .testimoni-caption p {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    .testimoni-caption .testimoni-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .testimoni-grid { grid-template-columns: 1fr; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       nav { padding: 0 24px; }
@@ -695,6 +766,7 @@
       <li><a href="#pendaftaran">Pendaftaran</a></li>
       <li><a href="#pembelajaran">Jenjang Pendidikan</a></li>
       <li><a href="#kampus">Fasilitas</a></li>
+      <li><a href="#testimoni">Testimoni</a></li>
       <li><a href="#keseharian">Keseharian</a></li>
       <li><a href="#karier">Karier</a></li>
     </ul>
@@ -710,7 +782,7 @@
     <div class="hero-img-overlay"></div>
     <div class="hero-content">
       <span class="hero-eyebrow">三语学校 - Trilingual School - Sekolah Tiga Bahasa</span>
-      <h1>Think <span> Global<br>Speak Trilingual</h1>
+      <h1>Think Global<br><span>Speak Trilingual</span></h1>
       <p>An integrated curriculum that empowers students to excel in Mandarin, English, and Bahasa Indonesia with confidence and purpose.</p>
       <div class="hero-buttons">
         <a href="#pembelajaran" class="btn-primary">Jelajahi Program</a>
@@ -856,7 +928,7 @@
     <div class="section-inner">
       <span class="section-eyebrow">Satu Lokasi, Semua Jenjang</span>
       <div class="gold-divider"></div>
-      <h2 class="section-title">Kampus Kami</h2>
+      <h2 class="section-title">Fasilitas Sekolah</h2>
       <p class="section-body" style="max-width:600px">
         Terletak di Kompleks City Park, Cengkareng, Jakarta Barat. Pah Tsung School menghadirkan lingkungan belajar yang lengkap, nyaman, dan kondusif untuk semua jenjang dalam satu kawasan terpadu.
       </p>
@@ -898,6 +970,50 @@
               </svg>
               Cengkareng Timur, Jakarta Barat
             </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONI -->
+  <section class="section testimoni" id="testimoni">
+    <div class="section-inner">
+      <span class="section-eyebrow">Apa Kata Mereka</span>
+      <div class="gold-divider"></div>
+      <h2 class="section-title">Testimoni Orang Tua & Alumni</h2>
+      <p class="section-body" style="max-width:580px">
+        Kepercayaan orang tua dan kebanggaan alumni adalah motivasi terbesar kami untuk terus berkembang.
+      </p>
+      <div class="testimoni-grid">
+        <div class="testimoni-card">
+          <div class="testimoni-video">
+            <iframe src="https://www.youtube.com/embed/5zWNZSX-ZiA?rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="testimoni-caption">
+            <span class="testimoni-tag">Wali Murid SD</span>
+            <h4>Pengalaman Belajar Trilingual</h4>
+            <p>Ganti VIDEO_ID_1 dengan ID video YouTube Pah Tsung School yang sesuai.</p>
+          </div>
+        </div>
+        <div class="testimoni-card">
+          <div class="testimoni-video">
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID_2?rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="testimoni-caption">
+            <span class="testimoni-tag">Wali Murid SMP</span>
+            <h4>Perkembangan Karakter & Akademik</h4>
+            <p>Ganti VIDEO_ID_2 dengan ID video YouTube Pah Tsung School yang sesuai.</p>
+          </div>
+        </div>
+        <div class="testimoni-card">
+          <div class="testimoni-video">
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID_3?rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="testimoni-caption">
+            <span class="testimoni-tag">Alumni SMA</span>
+            <h4>Siap Bersaing di Dunia Global</h4>
+            <p>Ganti VIDEO_ID_3 dengan ID video YouTube Pah Tsung School yang sesuai.</p>
           </div>
         </div>
       </div>
