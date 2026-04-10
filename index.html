@@ -802,6 +802,40 @@
       .cta-banner { padding: 60px 24px; }
       footer { padding: 48px 24px 24px; }
     }
+
+    /* ── HERO PARTNERS ── */
+    .hero-partners {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 10;
+      background: rgba(255,255,255,0.93);
+      backdrop-filter: blur(6px);
+      border-radius: 0 0 0 10px;
+      padding: 10px 16px 10px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      box-shadow: -2px 2px 16px rgba(0,0,0,0.15);
+    }
+    .hero-partners-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #6b7280;
+      display: block;
+    }
+    .hero-partners img {
+      height: 32px;
+      object-fit: contain;
+      display: block;
+    }
+    @media (max-width: 900px) {
+      .hero-partners { display: none; }
+    }
+
   </style>
 </head>
 <body>
@@ -826,6 +860,11 @@
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-partners">
+      <span class="hero-partners-label">Our Partners:</span>
+      <img src="https://i.ibb.co.com/35VqYTn8/logo-pearson-hsk-yct-web.png" alt="Pearson Edexcel HSK YCT"/>
+    </div>
+
     <div class="hero-bg"></div>
     <div class="hero-pattern"></div>
     <div class="hero-img-overlay"></div>
