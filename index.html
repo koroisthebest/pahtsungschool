@@ -802,6 +802,95 @@
       .cta-banner { padding: 60px 24px; }
       footer { padding: 48px 24px 24px; }
     }
+
+    /* ── MOBILE NAV ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+      z-index: 110;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0; right: 0;
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(12px);
+      z-index: 99;
+      border-bottom: 2px solid var(--gold);
+      box-shadow: 0 8px 32px rgba(13,34,64,0.12);
+      padding: 16px 0 24px;
+      transform: translateY(-10px);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .mobile-menu.open {
+      display: block;
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mobile-menu ul {
+      list-style: none;
+      padding: 0 24px;
+    }
+    .mobile-menu ul li {
+      border-bottom: 1px solid var(--light-gray);
+    }
+    .mobile-menu ul li:last-child { border-bottom: none; }
+    .mobile-menu ul li a {
+      display: block;
+      padding: 14px 4px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      transition: color 0.2s, padding-left 0.2s;
+    }
+    .mobile-menu ul li a:hover {
+      color: var(--gold);
+      padding-left: 12px;
+    }
+    .mobile-menu-cta {
+      padding: 16px 24px 0;
+    }
+    .mobile-menu-cta a {
+      display: block;
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .mobile-menu-cta a:hover { background: var(--gold); color: var(--navy); }
+
+    @media (max-width: 900px) {
+      .hamburger { display: flex; }
+      .nav-right { display: none; }
+    }
+
   </style>
 </head>
 <body>
@@ -822,7 +911,25 @@
     <div class="nav-right">
       <a href="#kontak" class="btn-cta"><span class="__cf_email__" data-cfemail="462f2820290636272e32353328216835252e682f22">[Kontak]</span></a>
     </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#tentang" onclick="closeMenu()">Tentang</a></li>
+      <li><a href="#pembelajaran" onclick="closeMenu()">Jenjang Pendidikan</a></li>
+      <li><a href="#kampus" onclick="closeMenu()">Fasilitas</a></li>
+      <li><a href="#testimoni" onclick="closeMenu()">Testimoni</a></li>
+      <li><a href="#keseharian" onclick="closeMenu()">Keseharian</a></li>
+      <li><a href="#pendaftaran" onclick="closeMenu()">Pendaftaran</a></li>
+    </ul>
+    <div class="mobile-menu-cta">
+      <a href="#kontak" onclick="closeMenu()">Hubungi Kami</a>
+    </div>
+  </div>
 
   <!-- HERO -->
   <section class="hero">
@@ -1161,6 +1268,36 @@
   </footer>
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
+    // Hamburger menu
+    function toggleMenu() {
+      const btn = document.getElementById('hamburger');
+      const menu = document.getElementById('mobileMenu');
+      btn.classList.toggle('open');
+      menu.classList.toggle('open');
+      document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+    }
+
+    function closeMenu() {
+      document.getElementById('hamburger').classList.remove('open');
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Tutup menu saat klik di luar
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('mobileMenu');
+      const btn = document.getElementById('hamburger');
+      if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    // Tutup menu saat resize ke desktop
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 900) closeMenu();
+    });
+
     // Navbar scroll effect
     const nav = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
