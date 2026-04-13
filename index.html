@@ -891,8 +891,260 @@
       .nav-right { display: none; }
     }
 
+
+    /* ── ALUMNI GLOBE ── */
+    .globe-section {
+      background: var(--navy);
+      padding: 80px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .globe-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 15% 18%, rgba(255,255,255,0.15) 0%, transparent 100%),
+        radial-gradient(1px 1px at 72%  9%, rgba(255,255,255,0.10) 0%, transparent 100%),
+        radial-gradient(1px 1px at 38% 55%, rgba(255,255,255,0.08) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 40%, rgba(255,255,255,0.12) 0%, transparent 100%),
+        radial-gradient(1px 1px at 54% 78%, rgba(255,255,255,0.07) 0%, transparent 100%),
+        radial-gradient(1px 1px at 28% 88%, rgba(255,255,255,0.09) 0%, transparent 100%),
+        radial-gradient(1px 1px at 91% 72%, rgba(255,255,255,0.11) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .globe-section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 480px;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .globe-left {}
+    .globe-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .globe-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+    .globe-title span { color: var(--gold); }
+    .globe-subtitle {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      max-width: 420px;
+      margin-bottom: 32px;
+    }
+    .globe-stats {
+      display: flex;
+      gap: 0;
+      border: 1px solid rgba(245,196,0,0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      width: fit-content;
+    }
+    .globe-stat {
+      padding: 16px 28px;
+      background: rgba(255,255,255,0.04);
+      text-align: center;
+      border-right: 1px solid rgba(245,196,0,0.2);
+    }
+    .globe-stat:last-child { border-right: none; }
+    .globe-stat-num {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .globe-stat-label {
+      font-size: 10px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .globe-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      margin-bottom: 28px;
+    }
+    .globe-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+    .globe-legend-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .globe-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 2px solid rgba(245,196,0,0.4);
+      padding-bottom: 2px;
+      cursor: pointer;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      font-family: var(--font-body);
+      transition: color 0.2s, gap 0.2s, border-color 0.2s;
+    }
+    .globe-more-btn:hover { color: var(--white); border-color: var(--white); gap: 12px; }
+
+    /* Campus list (hidden by default) */
+    .globe-campus-list {
+      display: none;
+      margin-top: 28px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px;
+      animation: fadeUp 0.5s ease both;
+    }
+    .globe-campus-list.show { display: grid; }
+    .globe-campus-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(245,196,0,0.1);
+      border-radius: 8px;
+      padding: 10px 12px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .globe-campus-card:hover {
+      border-color: rgba(245,196,0,0.3);
+      background: rgba(255,255,255,0.07);
+    }
+    .globe-campus-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .globe-campus-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.4;
+    }
+    .globe-campus-city {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      margin-top: 2px;
+    }
+
+    /* Globe canvas */
+    .globe-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .globe-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+    }
+    .globe-glow {
+      position: absolute;
+      inset: -18%;
+      background: radial-gradient(circle at 50% 50%, rgba(245,196,0,0.08) 0%, transparent 65%);
+      pointer-events: none;
+      border-radius: 50%;
+    }
+    #globe-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+      display: block;
+    }
+    #globe-canvas:active { cursor: grabbing; }
+    #globe-tooltip {
+      position: absolute;
+      background: rgba(13,34,64,0.97);
+      border: 1px solid rgba(245,196,0,0.3);
+      border-radius: 10px;
+      padding: 10px 16px;
+      pointer-events: none;
+      display: none;
+      white-space: nowrap;
+      z-index: 10;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .tt-name {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .tt-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .tt-city { font-size: 11px; color: rgba(255,255,255,0.45); padding-left: 14px; }
+    .globe-hint {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    @media (max-width: 900px) {
+      .globe-section { padding: 60px 24px; }
+      .globe-section-inner { grid-template-columns: 1fr; gap: 40px; }
+      .globe-right { order: -1; }
+      .globe-stats { width: 100%; }
+      .globe-stat { flex: 1; padding: 14px 12px; }
+    }
+
   </style>
   <script>
+
+    function toggleCampusList() {
+      var list = document.getElementById('globe-campus-list');
+      var arrow = document.getElementById('globe-btn-arrow');
+      var btn = document.querySelector('.globe-more-btn');
+      if (list.classList.contains('show')) {
+        list.classList.remove('show');
+        arrow.style.transform = 'rotate(0deg)';
+        btn.childNodes[0].textContent = 'Pelajari Lebih Lanjut ';
+      } else {
+        list.classList.add('show');
+        arrow.style.transform = 'rotate(90deg)';
+        btn.childNodes[0].textContent = 'Sembunyikan Daftar ';
+      }
+    }
+
     function toggleMenu() {
       var btn = document.getElementById('hamburger');
       var menu = document.getElementById('mobileMenu');
@@ -988,6 +1240,63 @@
       <div class="stat-item">
         <div class="stat-number">17<sup>+</sup></div>
         <div class="stat-label">Guru profesional berpengalaman, termasuk tenaga pengajar native speaker</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ALUMNI GLOBE -->
+  <section class="globe-section" id="alumni">
+    <div class="globe-section-inner">
+      <div class="globe-left">
+        <span class="globe-eyebrow">Jejak Alumni Sekolah Pah Tsung</span>
+        <div style="width:48px;height:3px;background:var(--gold);border-radius:2px;margin-bottom:20px;"></div>
+        <h2 class="globe-title">Kampus di <span>Seluruh Dunia</span></h2>
+        <p class="globe-subtitle">Tempat para alumni Pah Tsung belajar, berkarya, dan menorehkan prestasi di penjuru bumi — dari Asia hingga Eropa, dari Australia hingga Amerika.</p>
+        <div class="globe-stats">
+          <div class="globe-stat">
+            <div class="globe-stat-num">21</div>
+            <div class="globe-stat-label">Kampus</div>
+          </div>
+          <div class="globe-stat">
+            <div class="globe-stat-num">15</div>
+            <div class="globe-stat-label">Negara</div>
+          </div>
+          <div class="globe-stat">
+            <div class="globe-stat-num">5</div>
+            <div class="globe-stat-label">Benua</div>
+          </div>
+        </div>
+        <div class="globe-legend">
+          <div class="globe-legend-item"><div class="globe-legend-dot" style="background:#60a5fa;"></div>Asia</div>
+          <div class="globe-legend-item"><div class="globe-legend-dot" style="background:#10b981;"></div>Oseania</div>
+          <div class="globe-legend-item"><div class="globe-legend-dot" style="background:#f59e0b;"></div>Eropa</div>
+          <div class="globe-legend-item"><div class="globe-legend-dot" style="background:#ef4444;"></div>Amerika</div>
+          <div class="globe-legend-item"><div class="globe-legend-dot" style="background:#a855f7;"></div>Timur Tengah</div>
+        </div>
+        <button class="globe-more-btn" onclick="toggleCampusList()">
+          Pelajari Lebih Lanjut
+          <svg id="globe-btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition:transform 0.3s;">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+        <div class="globe-campus-list" id="globe-campus-list"></div>
+      </div>
+      <div class="globe-right">
+        <div class="globe-wrap" id="globe-wrap">
+          <div class="globe-glow"></div>
+          <canvas id="globe-canvas"></canvas>
+          <div id="globe-tooltip">
+            <div class="tt-name" id="tt-name"></div>
+            <div class="tt-city" id="tt-city"></div>
+          </div>
+        </div>
+        <p class="globe-hint">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+          </svg>
+          Drag untuk memutar &nbsp;·&nbsp; Hover titik untuk detail
+        </p>
       </div>
     </div>
   </section>
@@ -1286,6 +1595,22 @@
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
     // Hamburger menu
+
+    function toggleCampusList() {
+      var list = document.getElementById('globe-campus-list');
+      var arrow = document.getElementById('globe-btn-arrow');
+      var btn = document.querySelector('.globe-more-btn');
+      if (list.classList.contains('show')) {
+        list.classList.remove('show');
+        arrow.style.transform = 'rotate(0deg)';
+        btn.childNodes[0].textContent = 'Pelajari Lebih Lanjut ';
+      } else {
+        list.classList.add('show');
+        arrow.style.transform = 'rotate(90deg)';
+        btn.childNodes[0].textContent = 'Sembunyikan Daftar ';
+      }
+    }
+
     function toggleMenu() {
       const btn = document.getElementById('hamburger');
       const menu = document.getElementById('mobileMenu');
@@ -1366,4 +1691,172 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0
+          entry.target.style.transform = 'translateY(0)';
+          sectionObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    sections.forEach(s => {
+      s.style.opacity = '0';
+      s.style.transform = 'translateY(24px)';
+      s.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      sectionObserver.observe(s);
+    });
+  </script>
+
+  <!-- GLOBE SCRIPT -->
+  <script type="module">
+  import createGlobe from 'https://esm.sh/cobe@0.6.1';
+
+  const REGION_COLORS = {
+    asia:    '#60a5fa',
+    oceania: '#10b981',
+    eropa:   '#f59e0b',
+    amerika: '#ef4444',
+    timteng: '#a855f7',
+  };
+
+  const CAMPUSES = [
+    { name:"China Normal University",          city:"Shanghai, China",          lat:31.2304,  lng:121.4737,  region:"asia"    },
+    { name:"Tsinghua University",              city:"Beijing, China",           lat:40.0034,  lng:116.3219,  region:"asia"    },
+    { name:"Peking University",                city:"Beijing, China",           lat:39.9988,  lng:116.3098,  region:"asia"    },
+    { name:"University of Tokyo",             city:"Tokyo, Jepang",            lat:35.7133,  lng:139.7614,  region:"asia"    },
+    { name:"Seoul National University",       city:"Seoul, Korea Selatan",     lat:37.4601,  lng:126.9520,  region:"asia"    },
+    { name:"National University of Singapore",city:"Singapura",               lat:1.2966,   lng:103.7764,  region:"asia"    },
+    { name:"IIT Bombay",                      city:"Mumbai, India",            lat:19.1334,  lng:72.9133,   region:"asia"    },
+    { name:"Monash University",               city:"Melbourne, Australia",     lat:-37.9105, lng:145.1363,  region:"oceania" },
+    { name:"University of Melbourne",         city:"Melbourne, Australia",     lat:-37.7963, lng:144.9614,  region:"oceania" },
+    { name:"University of Sydney",            city:"Sydney, Australia",        lat:-33.8882, lng:151.1875,  region:"oceania" },
+    { name:"University of Auckland",          city:"Auckland, Selandia Baru",  lat:-36.8523, lng:174.7691,  region:"oceania" },
+    { name:"University of Oxford",            city:"Oxford, Inggris",          lat:51.7548,  lng:-1.2544,   region:"eropa"   },
+    { name:"University of Cambridge",         city:"Cambridge, Inggris",       lat:52.2043,  lng:0.1149,    region:"eropa"   },
+    { name:"ETH Zurich",                      city:"Zurich, Swiss",            lat:47.3763,  lng:8.5484,    region:"eropa"   },
+    { name:"Delft University of Technology",  city:"Delft, Belanda",           lat:51.9994,  lng:4.3732,    region:"eropa"   },
+    { name:"KU Leuven",                       city:"Leuven, Belgia",           lat:50.8788,  lng:4.7015,    region:"eropa"   },
+    { name:"Harvard University",              city:"Cambridge, USA",           lat:42.3770,  lng:-71.1167,  region:"amerika" },
+    { name:"MIT",                             city:"Cambridge, USA",           lat:42.3601,  lng:-71.0942,  region:"amerika" },
+    { name:"University of British Columbia",  city:"Vancouver, Kanada",        lat:49.2606,  lng:-123.2460, region:"amerika" },
+    { name:"King Abdulaziz University",       city:"Jeddah, Arab Saudi",       lat:21.4933,  lng:39.2480,   region:"timteng" },
+    { name:"American University of Beirut",   city:"Beirut, Lebanon",          lat:33.9005,  lng:35.4784,   region:"timteng" },
+  ];
+
+  const listEl = document.getElementById('globe-campus-list');
+  if (listEl) {
+    CAMPUSES.forEach(c => {
+      const col  = REGION_COLORS[c.region];
+      const card = document.createElement('div');
+      card.className = 'globe-campus-card';
+      card.innerHTML = '<div class="globe-campus-dot" style="background:'+col+';"></div><div><div class="globe-campus-name">'+c.name+'</div><div class="globe-campus-city">'+c.city+'</div></div>';
+      listEl.appendChild(card);
+    });
+  }
+
+  const wrap   = document.getElementById('globe-wrap');
+  const canvas = document.getElementById('globe-canvas');
+
+  if (wrap && canvas) {
+  const tip    = document.getElementById('globe-tooltip');
+  const ttName = document.getElementById('tt-name');
+  const ttCity = document.getElementById('tt-city');
+  const dpr    = Math.min(window.devicePixelRatio || 1, 2);
+
+  function setCanvasSize() {
+    const s = wrap.clientWidth;
+    canvas.width  = Math.round(s * dpr);
+    canvas.height = Math.round(s * dpr);
+  }
+  setCanvasSize();
+
+  let phi = 1.0, theta = 0.15;
+  let dragging = false, lx, ly;
+  let cphi = phi, ctheta = theta;
+
+  const globe = createGlobe(canvas, {
+    devicePixelRatio: dpr,
+    width:  canvas.width,
+    height: canvas.height,
+    phi, theta,
+    dark: 1,
+    diffuse: 1.5,
+    mapSamples: 22000,
+    mapBrightness: 7,
+    baseColor:   [0.06, 0.11, 0.24],
+    markerColor: [0.96, 0.77, 0.0],
+    glowColor:   [0.15, 0.12, 0.02],
+    markers: CAMPUSES.map(c => ({ location: [c.lat, c.lng], size: 0.065 })),
+    onRender(state) {
+      if (!dragging) phi += 0.0025;
+      state.phi   = phi;
+      state.theta = theta;
+      cphi   = phi;
+      ctheta = theta;
+    },
+  });
+
+  canvas.addEventListener('mousedown', e => { dragging = true; lx = e.clientX; ly = e.clientY; canvas.style.cursor = 'grabbing'; });
+  window.addEventListener('mouseup',   () => { dragging = false; canvas.style.cursor = 'grab'; });
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    phi   += (e.clientX - lx) * 0.005;
+    theta  = Math.max(-0.55, Math.min(0.55, theta - (e.clientY - ly) * 0.003));
+    lx = e.clientX; ly = e.clientY;
+  });
+  canvas.addEventListener('touchstart', e => { dragging = true; lx = e.touches[0].clientX; ly = e.touches[0].clientY; }, { passive: true });
+  window.addEventListener('touchend',   () => { dragging = false; });
+  window.addEventListener('touchmove',  e => {
+    if (!dragging) return;
+    phi   += (e.touches[0].clientX - lx) * 0.005;
+    theta  = Math.max(-0.55, Math.min(0.55, theta - (e.touches[0].clientY - ly) * 0.003));
+    lx = e.touches[0].clientX; ly = e.touches[0].clientY;
+  }, { passive: true });
+
+  function project(lat, lng) {
+    const wr = wrap.getBoundingClientRect();
+    const la = lat * Math.PI / 180;
+    const lo = lng * Math.PI / 180;
+    const x3 =  Math.cos(la) * Math.sin(lo - cphi);
+    const y3 =  Math.sin(la) * Math.cos(ctheta) - Math.cos(la) * Math.cos(lo - cphi) * Math.sin(ctheta);
+    const z3 =  Math.sin(la) * Math.sin(ctheta) + Math.cos(la) * Math.cos(lo - cphi) * Math.cos(ctheta);
+    if (z3 < 0.05) return null;
+    return {
+      sx: (0.5 + x3 * 0.47) * wr.width,
+      sy: (0.5 - y3 * 0.47) * wr.height,
+      cx: wr.left + (0.5 + x3 * 0.47) * wr.width,
+      cy: wr.top  + (0.5 - y3 * 0.47) * wr.height,
+    };
+  }
+
+  canvas.addEventListener('mousemove', e => {
+    let best = null, bd = 24;
+    CAMPUSES.forEach(c => {
+      const p = project(c.lat, c.lng);
+      if (!p) return;
+      const d = Math.hypot(p.cx - e.clientX, p.cy - e.clientY);
+      if (d < bd) { bd = d; best = { c, p }; }
+    });
+    if (best) {
+      const col = REGION_COLORS[best.c.region];
+      ttName.innerHTML = '<span class="tt-dot" style="background:'+col+';"></span>'+best.c.name;
+      ttCity.textContent = best.c.city;
+      tip.style.display = 'block';
+      const wr = wrap.getBoundingClientRect();
+      const tw = tip.offsetWidth  || 220;
+      const th = tip.offsetHeight || 50;
+      let tx = best.p.sx + 14;
+      let ty = best.p.sy - th / 2;
+      if (tx + tw > wr.width)  tx = best.p.sx - tw - 14;
+      if (ty < 0)              ty = 4;
+      if (ty + th > wr.height) ty = wr.height - th - 4;
+      tip.style.left = tx + 'px';
+      tip.style.top  = ty + 'px';
+    } else {
+      tip.style.display = 'none';
+    }
+  });
+  canvas.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
+  } // end if (wrap && canvas)
+  </script>
+
+</body>
+</html>
