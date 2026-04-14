@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pah Tsung – Trilingual School</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -1121,7 +1121,7 @@
 
     /* SVG label kampus — text only */
     .gl-label-name {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Outfit', sans-serif;
       font-size: 12px;
       font-weight: 700;
       dominant-baseline: middle;
@@ -1279,11 +1279,11 @@
         <p class="globe-subtitle">Tempat para alumni Pah Tsung belajar, berkarya, dan menorehkan prestasi di penjuru bumi — dari Asia hingga Eropa, dari Australia hingga Amerika.</p>
         <div class="globe-stats">
           <div class="globe-stat">
-            <div class="globe-stat-num">18</div>
+            <div class="globe-stat-num">20</div>
             <div class="globe-stat-label">Kampus</div>
           </div>
           <div class="globe-stat">
-            <div class="globe-stat-num">6</div>
+            <div class="globe-stat-num">7</div>
             <div class="globe-stat-label">Negara</div>
           </div>
           <div class="globe-stat">
@@ -1760,6 +1760,8 @@
     { name:"Xiamen University Malaysia",                      city:"Sepang, Malaysia",         lat:2.8415,   lng:101.7056,  region:"asia"    },
     { name:"Monash University",                               city:"Melbourne, Australia",     lat:-37.9105, lng:145.1363,  region:"oceania" },
     { name:"Macquarie University",                            city:"Sydney, Australia",        lat:-33.7738, lng:151.1126,  region:"oceania" },
+    { name:"Universitas Indonesia",                           city:"Depok, Indonesia",         lat:-6.3615,  lng:106.8290,  region:"asia"    },
+    { name:"Institut Teknologi Bandung",                      city:"Bandung, Indonesia",       lat:-6.8915,  lng:107.6107,  region:"asia"    },
   ];
 
   const listEl = document.getElementById('globe-campus-list');
@@ -1883,7 +1885,7 @@
 
     // teks nama
     const tName = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    tName.setAttribute('font-family', 'Playfair Display, serif');
+    tName.setAttribute('font-family', 'Outfit, sans-serif');
     tName.setAttribute('font-size', '11');
     tName.setAttribute('font-weight', '600');
     tName.setAttribute('dominant-baseline', 'middle');
