@@ -1279,15 +1279,15 @@
         <p class="globe-subtitle">Tempat para alumni Pah Tsung belajar, berkarya, dan menorehkan prestasi di penjuru bumi — dari Asia hingga Eropa, dari Australia hingga Amerika.</p>
         <div class="globe-stats">
           <div class="globe-stat">
-            <div class="globe-stat-num">21</div>
+            <div class="globe-stat-num">18</div>
             <div class="globe-stat-label">Kampus</div>
           </div>
           <div class="globe-stat">
-            <div class="globe-stat-num">15</div>
+            <div class="globe-stat-num">6</div>
             <div class="globe-stat-label">Negara</div>
           </div>
           <div class="globe-stat">
-            <div class="globe-stat-num">5</div>
+            <div class="globe-stat-num">3</div>
             <div class="globe-stat-label">Benua</div>
           </div>
         </div>
@@ -1295,8 +1295,7 @@
           <div class="globe-legend-item"><div class="globe-legend-dot" style="background:#60a5fa;"></div>Asia</div>
           <div class="globe-legend-item"><div class="globe-legend-dot" style="background:#10b981;"></div>Oseania</div>
           <div class="globe-legend-item"><div class="globe-legend-dot" style="background:#f59e0b;"></div>Eropa</div>
-          <div class="globe-legend-item"><div class="globe-legend-dot" style="background:#ef4444;"></div>Amerika</div>
-          <div class="globe-legend-item"><div class="globe-legend-dot" style="background:#a855f7;"></div>Timur Tengah</div>
+
         </div>
         <button class="globe-more-btn" onclick="toggleCampusList()">
           Tempat Kami Melanjutkan Pendidikan
@@ -1743,27 +1742,24 @@
   };
 
   const CAMPUSES = [
-    { name:"China Normal University",          city:"Shanghai, China",          lat:31.2304,  lng:121.4737,  region:"asia"    },
-    { name:"Tsinghua University",              city:"Beijing, China",           lat:40.0034,  lng:116.3219,  region:"asia"    },
-    { name:"Peking University",                city:"Beijing, China",           lat:39.9988,  lng:116.3098,  region:"asia"    },
-    { name:"University of Tokyo",             city:"Tokyo, Jepang",            lat:35.7133,  lng:139.7614,  region:"asia"    },
-    { name:"Seoul National University",       city:"Seoul, Korea Selatan",     lat:37.4601,  lng:126.9520,  region:"asia"    },
-    { name:"National University of Singapore",city:"Singapura",               lat:1.2966,   lng:103.7764,  region:"asia"    },
-    { name:"IIT Bombay",                      city:"Mumbai, India",            lat:19.1334,  lng:72.9133,   region:"asia"    },
-    { name:"Monash University",               city:"Melbourne, Australia",     lat:-37.9105, lng:145.1363,  region:"oceania" },
-    { name:"University of Melbourne",         city:"Melbourne, Australia",     lat:-37.7963, lng:144.9614,  region:"oceania" },
-    { name:"University of Sydney",            city:"Sydney, Australia",        lat:-33.8882, lng:151.1875,  region:"oceania" },
-    { name:"University of Auckland",          city:"Auckland, Selandia Baru",  lat:-36.8523, lng:174.7691,  region:"oceania" },
-    { name:"University of Oxford",            city:"Oxford, Inggris",          lat:51.7548,  lng:-1.2544,   region:"eropa"   },
-    { name:"University of Cambridge",         city:"Cambridge, Inggris",       lat:52.2043,  lng:0.1149,    region:"eropa"   },
-    { name:"ETH Zurich",                      city:"Zurich, Swiss",            lat:47.3763,  lng:8.5484,    region:"eropa"   },
-    { name:"Delft University of Technology",  city:"Delft, Belanda",           lat:51.9994,  lng:4.3732,    region:"eropa"   },
-    { name:"KU Leuven",                       city:"Leuven, Belgia",           lat:50.8788,  lng:4.7015,    region:"eropa"   },
-    { name:"Harvard University",              city:"Cambridge, USA",           lat:42.3770,  lng:-71.1167,  region:"amerika" },
-    { name:"MIT",                             city:"Cambridge, USA",           lat:42.3601,  lng:-71.0942,  region:"amerika" },
-    { name:"University of British Columbia",  city:"Vancouver, Kanada",        lat:49.2606,  lng:-123.2460, region:"amerika" },
-    { name:"King Abdulaziz University",       city:"Jeddah, Arab Saudi",       lat:21.4933,  lng:39.2480,   region:"timteng" },
-    { name:"American University of Beirut",   city:"Beirut, Lebanon",          lat:33.9005,  lng:35.4784,   region:"timteng" },
+    { name:"Zhejiang University 浙江大学",                    city:"Hangzhou, China",          lat:30.2589,  lng:120.1219,  region:"asia"    },
+    { name:"Wuhan University 武汉大学",                       city:"Wuhan, China",             lat:30.5355,  lng:114.3637,  region:"asia"    },
+    { name:"Beijing Institute of Technology 北京理工大学",    city:"Beijing, China",           lat:39.9534,  lng:116.3199,  region:"asia"    },
+    { name:"Chinese Culture University",                      city:"Taipei, Taiwan",           lat:25.0929,  lng:121.5694,  region:"asia"    },
+    { name:"South China Univ. of Technology 华南理工大学",    city:"Guangzhou, China",         lat:23.0490,  lng:113.4044,  region:"asia"    },
+    { name:"National Tsing Hua University 国立清华大学",      city:"Hsinchu, Taiwan",          lat:24.7961,  lng:120.9967,  region:"asia"    },
+    { name:"National Taiwan University 国立台湾大学",         city:"Taipei, Taiwan",           lat:25.0173,  lng:121.5397,  region:"asia"    },
+    { name:"China Medical University 中国医药大学",           city:"Taichung, Taiwan",         lat:24.1360,  lng:120.6741,  region:"asia"    },
+    { name:"National Cheng Chi University 国立政治大学",      city:"Taipei, Taiwan",           lat:24.9876,  lng:121.5773,  region:"asia"    },
+    { name:"Zhejiang Univ. of Sci. & Tech. 浙江科技大学",    city:"Hangzhou, China",          lat:30.3068,  lng:119.9548,  region:"asia"    },
+    { name:"Sichuan Univ. of Science & Engineering",          city:"Zigong, China",            lat:29.3513,  lng:104.7739,  region:"asia"    },
+    { name:"Jiangsu University 江苏大学",                     city:"Zhenjiang, China",         lat:32.2017,  lng:119.4538,  region:"asia"    },
+    { name:"Shenzhen University 深圳大学",                    city:"Shenzhen, China",          lat:22.5318,  lng:113.9340,  region:"asia"    },
+    { name:"Nanjing University 南京大学",                     city:"Nanjing, China",           lat:32.0613,  lng:118.7778,  region:"asia"    },
+    { name:"Xi'an Jiaotong-Liverpool University",             city:"Suzhou, China",            lat:31.2628,  lng:120.7347,  region:"asia"    },
+    { name:"Xiamen University Malaysia",                      city:"Sepang, Malaysia",         lat:2.8415,   lng:101.7056,  region:"asia"    },
+    { name:"Monash University",                               city:"Melbourne, Australia",     lat:-37.9105, lng:145.1363,  region:"oceania" },
+    { name:"Macquarie University",                            city:"Sydney, Australia",        lat:-33.7738, lng:151.1126,  region:"oceania" },
   ];
 
   const listEl = document.getElementById('globe-campus-list');
