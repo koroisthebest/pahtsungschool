@@ -1119,6 +1119,30 @@
       gap: 6px;
     }
 
+    /* SVG label kampus — text only */
+    .gl-label-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 12px;
+      font-weight: 700;
+      dominant-baseline: middle;
+      paint-order: stroke fill;
+      stroke: rgba(13,34,64,0.9);
+      stroke-width: 4px;
+      stroke-linejoin: round;
+    }
+    .gl-label-city {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      fill: rgba(255,255,255,0.55);
+      dominant-baseline: middle;
+      paint-order: stroke fill;
+      stroke: rgba(13,34,64,0.9);
+      stroke-width: 3px;
+    }
+    .gl-label-group {
+      transition: opacity 0.5s ease;
+    }
+
     @media (max-width: 900px) {
       .globe-section { padding: 60px 24px; }
       .globe-section-inner { grid-template-columns: 1fr; gap: 40px; }
@@ -1137,7 +1161,7 @@
       if (list.classList.contains('show')) {
         list.classList.remove('show');
         arrow.style.transform = 'rotate(0deg)';
-        btn.childNodes[0].textContent = 'Pelajari Lebih Lanjut ';
+        btn.childNodes[0].textContent = 'Tempat Kami Melanjutkan Pendidikan ';
       } else {
         list.classList.add('show');
         arrow.style.transform = 'rotate(90deg)';
@@ -1251,7 +1275,7 @@
       <div class="globe-left">
         <span class="globe-eyebrow">Jejak Alumni Sekolah Pah Tsung</span>
         <div style="width:48px;height:3px;background:var(--gold);border-radius:2px;margin-bottom:20px;"></div>
-        <h2 class="globe-title">Kampus di <span>Seluruh Dunia</span></h2>
+        <h2 class="globe-title">di Kampus <span>Seluruh Dunia</span></h2>
         <p class="globe-subtitle">Tempat para alumni Pah Tsung belajar, berkarya, dan menorehkan prestasi di penjuru bumi — dari Asia hingga Eropa, dari Australia hingga Amerika.</p>
         <div class="globe-stats">
           <div class="globe-stat">
@@ -1275,7 +1299,7 @@
           <div class="globe-legend-item"><div class="globe-legend-dot" style="background:#a855f7;"></div>Timur Tengah</div>
         </div>
         <button class="globe-more-btn" onclick="toggleCampusList()">
-          Pelajari Lebih Lanjut
+          Tempat Kami Melanjutkan Pendidikan
           <svg id="globe-btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition:transform 0.3s;">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
@@ -1286,6 +1310,7 @@
         <div class="globe-wrap" id="globe-wrap">
           <div class="globe-glow"></div>
           <canvas id="globe-canvas"></canvas>
+          <svg id="globe-svg-overlay" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;"></svg>
           <div id="globe-tooltip">
             <div class="tt-name" id="tt-name"></div>
             <div class="tt-city" id="tt-city"></div>
@@ -1603,7 +1628,7 @@
       if (list.classList.contains('show')) {
         list.classList.remove('show');
         arrow.style.transform = 'rotate(0deg)';
-        btn.childNodes[0].textContent = 'Pelajari Lebih Lanjut ';
+        btn.childNodes[0].textContent = 'Tempat Kami Melanjutkan Pendidikan ';
       } else {
         list.classList.add('show');
         arrow.style.transform = 'rotate(90deg)';
@@ -1756,9 +1781,6 @@
   const canvas = document.getElementById('globe-canvas');
 
   if (wrap && canvas) {
-  const tip    = document.getElementById('globe-tooltip');
-  const ttName = document.getElementById('tt-name');
-  const ttCity = document.getElementById('tt-city');
   const dpr    = Math.min(window.devicePixelRatio || 1, 2);
 
   function setCanvasSize() {
@@ -1777,16 +1799,16 @@
     width:  canvas.width,
     height: canvas.height,
     phi, theta,
-    dark: 1,
-    diffuse: 1.5,
+    dark: 0.6,
+    diffuse: 1.8,
     mapSamples: 22000,
-    mapBrightness: 7,
-    baseColor:   [0.06, 0.11, 0.24],
+    mapBrightness: 8,
+    baseColor:   [0.05, 0.18, 0.45],
     markerColor: [0.96, 0.77, 0.0],
-    glowColor:   [0.15, 0.12, 0.02],
+    glowColor:   [0.05, 0.18, 0.55],
     markers: CAMPUSES.map(c => ({ location: [c.lat, c.lng], size: 0.065 })),
     onRender(state) {
-      if (!dragging) phi += 0.0025;
+      if (!dragging) phi += 0.0012;
       state.phi   = phi;
       state.theta = theta;
       cphi   = phi;
@@ -1811,6 +1833,7 @@
     lx = e.touches[0].clientX; ly = e.touches[0].clientY;
   }, { passive: true });
 
+  // ── FUNGSI PROYEKSI TITIK KE KOORDINAT LAYAR ──
   function project(lat, lng) {
     const wr = wrap.getBoundingClientRect();
     const la = lat * Math.PI / 180;
@@ -1818,14 +1841,209 @@
     const x3 =  Math.cos(la) * Math.sin(lo - cphi);
     const y3 =  Math.sin(la) * Math.cos(ctheta) - Math.cos(la) * Math.cos(lo - cphi) * Math.sin(ctheta);
     const z3 =  Math.sin(la) * Math.sin(ctheta) + Math.cos(la) * Math.cos(lo - cphi) * Math.cos(ctheta);
-    if (z3 < 0.05) return null;
+    if (z3 < 0.08) return null;
     return {
       sx: (0.5 + x3 * 0.47) * wr.width,
       sy: (0.5 - y3 * 0.47) * wr.height,
       cx: wr.left + (0.5 + x3 * 0.47) * wr.width,
       cy: wr.top  + (0.5 - y3 * 0.47) * wr.height,
+      z3,
     };
   }
+
+  // ── LABEL SVG MENGIKUTI TITIK ──
+  const svg = document.getElementById('globe-svg-overlay');
+  const MAX_LABELS = 3;
+  const CYCLE_MS   = 3500;  // seberapa sering 1 label diganti
+  const FADE_MS    = 500;
+
+  // Ukur lebar teks di SVG (aproksimasi karena SVG belum di-DOM sepenuhnya)
+  function measureText(text, fontSize, bold) {
+    const avgW = bold ? fontSize * 0.62 : fontSize * 0.55;
+    return text.length * avgW;
+  }
+
+  // Buat grup SVG per slot label
+  const slots = [];
+  for (let i = 0; i < MAX_LABELS; i++) {
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.style.opacity = '0';
+    g.style.transition = 'opacity ' + FADE_MS + 'ms ease';
+
+    // garis dari titik ke kotak
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('stroke-width', '1');
+    line.setAttribute('stroke-linecap', 'round');
+
+    // dot kecil tepat di titik
+    const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    dot.setAttribute('r', '3');
+
+    // kotak background
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    rect.setAttribute('rx', '7');
+    rect.setAttribute('fill', 'rgba(13,34,64,0.93)');
+    rect.setAttribute('stroke-width', '1');
+
+    // teks nama
+    const tName = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    tName.setAttribute('font-family', 'Playfair Display, serif');
+    tName.setAttribute('font-size', '11');
+    tName.setAttribute('font-weight', '600');
+    tName.setAttribute('dominant-baseline', 'middle');
+
+    // teks kota
+    const tCity = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    tCity.setAttribute('font-family', 'DM Sans, sans-serif');
+    tCity.setAttribute('font-size', '10');
+    tCity.setAttribute('fill', 'rgba(255,255,255,0.5)');
+    tCity.setAttribute('dominant-baseline', 'middle');
+
+    g.appendChild(line);
+    g.appendChild(dot);
+    g.appendChild(rect);
+    g.appendChild(tName);
+    g.appendChild(tCity);
+    svg.appendChild(g);
+
+    slots.push({
+      g, line, dot, rect, tName, tCity,
+      campusIdx: -1,
+      visible: false,
+    });
+  }
+
+  let cycleSlot = 0;
+
+  function assignCampusToSlot(slot, campusIdx) {
+    const c = CAMPUSES[campusIdx];
+    const col = REGION_COLORS[c.region];
+    slot.campusIdx = campusIdx;
+    slot.tName.textContent = c.name;
+    slot.tName.setAttribute('fill', col);
+    slot.tCity.textContent = c.city;
+    slot.dot.setAttribute('fill', col);
+  }
+
+  function cycleLabelSlot() {
+    const slot = slots[cycleSlot];
+
+    // Pilih kampus: visible, tidak sedang dipakai slot lain
+    const usedIdxs = slots.map(s => s.campusIdx);
+    const candidates = CAMPUSES
+      .map((c, i) => ({ c, i, p: project(c.lat, c.lng) }))
+      .filter(x => x.p !== null && !usedIdxs.includes(x.i))
+      .sort((a, b) => b.p.z3 - a.p.z3);
+
+    if (candidates.length === 0) { cycleSlot = (cycleSlot + 1) % MAX_LABELS; return; }
+
+    // Ambil dari 6 terdepan secara acak
+    const pool = candidates.slice(0, 6);
+    const pick = pool[Math.floor(Math.random() * pool.length)];
+
+    // Fade out → ganti konten → fade in
+    slot.g.style.opacity = '0';
+    slot.visible = false;
+    setTimeout(() => {
+      assignCampusToSlot(slot, pick.i);
+      slot.visible = true;
+      slot.g.style.opacity = '1';
+    }, FADE_MS + 50);
+
+    cycleSlot = (cycleSlot + 1) % MAX_LABELS;
+  }
+
+  // Init: isi semua slot dengan kampus berbeda lalu mulai interval
+  setTimeout(() => {
+    for (let i = 0; i < MAX_LABELS; i++) {
+      setTimeout(() => cycleLabelSlot(), i * 300);
+    }
+    setInterval(cycleLabelSlot, CYCLE_MS);
+  }, 600);
+
+  // ── LOOP UPDATE POSISI SVG SETIAP FRAME ──
+  const TEXT_OFFSET = 16;
+  const ROW_H = 32; // tinggi per label (nama + kota)
+
+  function updateSVGLabels() {
+    const wr = wrap.getBoundingClientRect();
+    const W = wr.width, H = wr.height;
+
+    // Kumpulkan posisi semua slot yang visible
+    const positions = [];
+
+    slots.forEach(slot => {
+      if (slot.campusIdx < 0) return;
+      const c = CAMPUSES[slot.campusIdx];
+      const p = project(c.lat, c.lng);
+
+      if (!p) {
+        if (slot.visible) {
+          slot.g.style.opacity = '0';
+          slot.visible = false;
+          setTimeout(() => { slot.campusIdx = -1; }, FADE_MS);
+        }
+        return;
+      }
+
+      if (!slot.visible) {
+        slot.g.style.opacity = '1';
+        slot.visible = true;
+      }
+
+      slot._px = p.sx;
+      slot._py = p.sy;
+      positions.push(slot);
+    });
+
+    // Sort by Y agar resolusi overlap lebih konsisten
+    positions.sort((a, b) => a._py - b._py);
+
+    // Anti-overlap: geser Y jika terlalu dekat
+    for (let i = 1; i < positions.length; i++) {
+      const prev = positions[i - 1];
+      const curr = positions[i];
+      const minDist = ROW_H + 4;
+      if (curr._py - prev._targetY < minDist) {
+        curr._py = prev._targetY + minDist;
+      }
+    }
+
+    positions.forEach(slot => {
+      const px = slot._px;
+      const py = slot._py;
+
+      // Clamp vertikal
+      const clampY = Math.max(14, Math.min(H - 24, py));
+      slot._targetY = clampY;
+
+      // Sisi kiri/kanan
+      const nameW = measureText(slot.tName.textContent, 12, true);
+      const goRight = (px + TEXT_OFFSET + nameW + 8) <= W;
+      const tx = goRight ? px + TEXT_OFFSET : px - TEXT_OFFSET;
+      const anchor = goRight ? 'start' : 'end';
+
+      // Dot tetap di posisi asli titik globe
+      slot.dot.setAttribute('cx', slot._px);
+      slot.dot.setAttribute('cy', slot._py);
+
+      slot.tName.setAttribute('x', tx);
+      slot.tName.setAttribute('y', clampY - 7);
+      slot.tName.setAttribute('text-anchor', anchor);
+
+      slot.tCity.setAttribute('x', tx);
+      slot.tCity.setAttribute('y', clampY + 7);
+      slot.tCity.setAttribute('text-anchor', anchor);
+    });
+
+    requestAnimationFrame(updateSVGLabels);
+  }
+  updateSVGLabels();
+
+  // ── HOVER TOOLTIP ──
+  const tip    = document.getElementById('globe-tooltip');
+  const ttName = document.getElementById('tt-name');
+  const ttCity = document.getElementById('tt-city');
 
   canvas.addEventListener('mousemove', e => {
     let best = null, bd = 24;
@@ -1840,14 +2058,14 @@
       ttName.innerHTML = '<span class="tt-dot" style="background:'+col+';"></span>'+best.c.name;
       ttCity.textContent = best.c.city;
       tip.style.display = 'block';
-      const wr = wrap.getBoundingClientRect();
+      const wr2 = wrap.getBoundingClientRect();
       const tw = tip.offsetWidth  || 220;
       const th = tip.offsetHeight || 50;
       let tx = best.p.sx + 14;
       let ty = best.p.sy - th / 2;
-      if (tx + tw > wr.width)  tx = best.p.sx - tw - 14;
-      if (ty < 0)              ty = 4;
-      if (ty + th > wr.height) ty = wr.height - th - 4;
+      if (tx + tw > wr2.width)  tx = best.p.sx - tw - 14;
+      if (ty < 0)               ty = 4;
+      if (ty + th > wr2.height) ty = wr2.height - th - 4;
       tip.style.left = tx + 'px';
       tip.style.top  = ty + 'px';
     } else {
