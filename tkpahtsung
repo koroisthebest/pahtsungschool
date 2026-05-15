@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TK Pah Tsung – Taman Kanak-Kanak</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d2240;
+      --navy-light: #163360;
+      --gold: #F5C400;
+      --gold-light: #FFD740;
+      --white: #ffffff;
+      --off-white: #f8f5f0;
+      --gray: #6b7280;
+      --light-gray: #e5e7eb;
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--navy); background: var(--white); overflow-x: hidden; }
+
+    
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 72px;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(245,196,0,0.2);
+      box-shadow: 0 4px 24px rgba(13,34,64,0.08);
+    }
+
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo img {
+      height: 44px;
+      object-fit: contain;
+    }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      transition: color 0.2s, gap 0.2s;
+    }
+
+    .nav-back:hover {
+      color: var(--gold);
+      gap: 12px;
+    }
+
+    .nav-back svg {
+      transition: transform 0.2s;
+    }
+
+    .nav-back:hover svg {
+      transform: translateX(-3px);
+    }
+
+
+    /* JENJANG HERO */
+    .jenjang-hero {
+      position: relative; min-height: 560px;
+      display: flex; align-items: flex-end;
+      overflow: hidden; background: var(--navy);
+      padding-top: 72px;
+    }
+    .jenjang-hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #0d2240 0%, #1a3a6b 60%, #0d2240 100%);
+    }
+    .jenjang-hero-pattern {
+      position: absolute; inset: 0; opacity: 0.05;
+      background-image: radial-gradient(circle at 2px 2px, var(--gold) 1px, transparent 0);
+      background-size: 40px 40px;
+    }
+    .jenjang-hero-img {
+      position: absolute; inset: 0;
+      background: url('https://i.ibb.co.com/fz1f8ygx/TK-banner-web.jpg') center/cover no-repeat;
+      opacity: 0.22;
+    }
+    .jenjang-hero-content {
+      position: relative; z-index: 2;
+      padding: 60px 80px 80px;
+      max-width: 1100px; width: 100%;
+      animation: fadeUp 0.8s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 24px;
+    }
+    .breadcrumb a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb span { font-size: 13px; color: rgba(255,255,255,0.3); }
+    .breadcrumb .current { font-size: 13px; color: var(--gold); font-weight: 500; }
+    .jenjang-eyebrow {
+      display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+      border: 1px solid rgba(245,196,0,0.4); padding: 5px 14px; border-radius: 20px;
+    }
+    .jenjang-hero h1 {
+      font-family: var(--font-display); font-size: clamp(36px, 5vw, 64px);
+      color: var(--white); font-weight: 700; line-height: 1.1;
+      letter-spacing: -1px; margin-bottom: 20px;
+    }
+    .jenjang-hero h1 span { color: var(--gold); }
+    .jenjang-hero-desc {
+      font-size: 17px; color: rgba(255,255,255,0.65); max-width: 580px;
+      line-height: 1.7; font-weight: 300; margin-bottom: 40px;
+    }
+    .jenjang-meta {
+      display: flex; gap: 32px; flex-wrap: wrap;
+    }
+    .jenjang-meta-item {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .jenjang-meta-item .meta-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: rgba(245,196,0,0.15); border: 1px solid rgba(245,196,0,0.3);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold);
+    }
+    .jenjang-meta-item .meta-label { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 1px; text-transform: uppercase; }
+    .jenjang-meta-item .meta-val { font-size: 14px; color: var(--white); font-weight: 600; }
+
+    /* JENJANG NAV */
+    .jenjang-nav {
+      background: var(--off-white); border-bottom: 2px solid var(--light-gray);
+      padding: 0 80px; display: flex; gap: 0; overflow-x: auto;
+    }
+    .jenjang-nav a {
+      text-decoration: none; padding: 18px 24px; font-size: 14px; font-weight: 500;
+      color: var(--gray); border-bottom: 3px solid transparent; white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .jenjang-nav a:hover { color: var(--navy); }
+    .jenjang-nav a.active { color: var(--navy); border-bottom-color: var(--gold); font-weight: 600; }
+
+    /* SECTION */
+    .section { padding: 80px 80px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block;
+    }
+    .gold-divider { width: 50px; height: 3px; background: var(--gold); border-radius: 2px; margin-bottom: 20px; }
+    .section-title {
+      font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 700; color: var(--navy); line-height: 1.2;
+      letter-spacing: -0.5px; margin-bottom: 20px;
+    }
+    .section-body { font-size: 16px; color: var(--gray); line-height: 1.8; margin-bottom: 24px; }
+
+    /* VISI MISI */
+    .vision-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px;
+    }
+    .vision-card {
+      background: var(--navy); border-radius: 14px; padding: 36px;
+      position: relative; overflow: hidden;
+    }
+    .vision-card::before {
+      content: ''; position: absolute; top: -40px; right: -40px;
+      width: 120px; height: 120px; border-radius: 50%;
+      background: rgba(245,196,0,0.06);
+    }
+    .vision-card-icon {
+      width: 48px; height: 48px; background: rgba(245,196,0,0.12);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; color: var(--gold);
+    }
+    .vision-card h3 {
+      font-family: var(--font-display); font-size: 20px; font-weight: 700;
+      color: var(--white); margin-bottom: 14px;
+    }
+    .vision-card p { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+    .vision-card ul { list-style: none; }
+    .vision-card ul li {
+      font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6;
+      padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .vision-card ul li:last-child { border-bottom: none; }
+    .vision-card ul li::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0; margin-top: 7px;
+    }
+
+    /* KURIKULUM */
+    .kurikulum-section { background: var(--off-white); }
+    .kurikulum-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .kurikulum-card {
+      background: var(--white); border-radius: 12px; padding: 28px;
+      box-shadow: 0 2px 16px rgba(13,34,64,0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-top: 3px solid var(--gold);
+    }
+    .kurikulum-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(13,34,64,0.1);
+    }
+    .kurikulum-card-icon {
+      width: 44px; height: 44px; background: rgba(13,34,64,0.06);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px; color: var(--navy);
+    }
+    .kurikulum-card h4 {
+      font-family: var(--font-display); font-size: 17px; font-weight: 700;
+      color: var(--navy); margin-bottom: 10px;
+    }
+    .kurikulum-card p { font-size: 14px; color: var(--gray); line-height: 1.7; }
+
+    /* KEGIATAN / ACTIVITIES */
+    .activities-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 48px; }
+    .activities-img {
+      border-radius: 14px; overflow: hidden; position: relative;
+    }
+    .activities-img img {
+      width: 100%; height: 420px; object-fit: cover; display: block;
+    }
+    .activities-img-badge {
+      position: absolute; bottom: -16px; right: -16px;
+      background: var(--gold); padding: 18px 22px; border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(245,196,0,0.35);
+    }
+    .activities-img-badge .badge-num {
+      font-family: var(--font-display); font-size: 32px; font-weight: 700;
+      color: var(--navy); line-height: 1;
+    }
+    .activities-img-badge .badge-txt { font-size: 11px; color: rgba(13,34,64,0.7); margin-top: 2px; }
+    .activities-list { list-style: none; }
+    .activities-list li {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 16px 0; border-bottom: 1px solid var(--light-gray);
+    }
+    .activities-list li:last-child { border-bottom: none; }
+    .act-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(13,34,64,0.05); display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: var(--navy);
+    }
+    .act-title { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+    .act-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+    /* STATS */
+    .stats-row {
+      background: var(--navy); padding: 60px 80px;
+    }
+    .stats-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center;
+    }
+    .stat-item {}
+    .stat-number {
+      font-family: var(--font-display); font-size: 48px; font-weight: 700;
+      color: var(--gold); line-height: 1; margin-bottom: 8px;
+    }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      padding: 80px 80px; text-align: center;
+    }
+    .cta-section h2 {
+      font-family: var(--font-display); font-size: clamp(26px, 4vw, 44px);
+      color: var(--white); font-weight: 700; letter-spacing: -0.5px; margin-bottom: 14px;
+    }
+    .cta-section h2 span { color: var(--gold); }
+    .cta-section p { font-size: 16px; color: rgba(255,255,255,0.6); max-width: 460px; margin: 0 auto 36px; line-height: 1.7; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--navy); padding: 14px 32px;
+      border-radius: 6px; font-size: 15px; font-weight: 600; text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,0.4);
+      padding: 14px 32px; border-radius: 6px; font-size: 15px; font-weight: 500;
+      text-decoration: none; transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+
+    /* OTHER LEVELS */
+    .other-levels { background: var(--off-white); }
+    .other-levels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+    .other-card {
+      background: var(--navy); border-radius: 12px; overflow: hidden;
+      text-decoration: none; transition: transform 0.3s;
+    }
+    .other-card:hover { transform: translateY(-4px); }
+    .other-card img { width: 100%; height: 160px; object-fit: cover; display: block; opacity: 0.7; }
+    .other-card-body { padding: 20px; }
+    .other-card-grade { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; display: block; }
+    .other-card h4 { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+    .other-card p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+    /* FOOTER */
+    footer { background: #08192e; padding: 60px 80px 32px; }
+    .footer-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+      padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo img { height: 42px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.95; }
+    .footer-desc { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.7; max-width: 260px; }
+    .footer-col h5 { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { text-decoration: none; font-size: 14px; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--white); }
+    .footer-bottom {
+      max-width: 1100px; margin: 0 auto; padding-top: 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; color: rgba(255,255,255,0.3); flex-wrap: wrap; gap: 12px;
+    }
+
+    @media (max-width: 960px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .jenjang-hero-content { padding: 40px 24px 60px; }
+      .section { padding: 60px 24px; }
+      .vision-grid, .kurikulum-grid, .activities-grid, .stats-inner, .other-levels-grid { grid-template-columns: 1fr; }
+      .jenjang-nav { padding: 0 24px; }
+      .stats-row { padding: 48px 24px; }
+      .cta-section { padding: 60px 24px; }
+      footer { padding: 48px 24px 24px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  
+  <!-- NAVBAR -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="https://i.ibb.co.com/1fMy5VXb/logo-Pah-Tsung-text-biru-utk-video.png" alt="Logo Pah Tsung"/>
+    </a>
+
+    <a href="index.html" class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M19 12H5M12 5l-7 7 7 7"/>
+      </svg>
+      Kembali ke Beranda
+    </a>
+  </nav>
+
+
+  <!-- HERO -->
+  <section class="jenjang-hero">
+    <div class="jenjang-hero-bg"></div>
+    <div class="jenjang-hero-pattern"></div>
+    <div class="jenjang-hero-img"></div>
+    <div class="jenjang-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html">Beranda</a>
+        <span>›</span>
+        <a href="index.html#pembelajaran">Jenjang Pendidikan</a>
+        <span>›</span>
+        <span class="current">TK Pah Tsung</span>
+      </div>
+      <span class="jenjang-eyebrow">幼儿园 · Taman Kanak-Kanak</span>
+      <h1>TK <span>Pah Tsung</span></h1>
+      <p class="jenjang-hero-desc">Fondasi terbaik untuk tumbuh kembang anak sejak dini — belajar tiga bahasa melalui bermain, eksplorasi, dan kasih sayang dalam lingkungan yang aman dan menyenangkan.</p>
+      <div class="jenjang-meta">
+        <div class="jenjang-meta-item">
+          <div class="meta-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          </div>
+          <div>
+            <div class="meta-label">Jenjang</div>
+            <div class="meta-val">Nursery, Playgroup & Kindergarten</div>
+          </div>
+        </div>
+        <div class="jenjang-meta-item">
+          <div class="meta-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div>
+            <div class="meta-label">Usia</div>
+            <div class="meta-val">2 – 6 Tahun</div>
+          </div>
+        </div>
+        <div class="jenjang-meta-item">
+          <div class="meta-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <div>
+            <div class="meta-label">Bahasa</div>
+            <div class="meta-val">Mandarin · Inggris · Indonesia</div>
+          </div>
+        </div>
+        <div class="jenjang-meta-item">
+          <div class="meta-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+          <div>
+            <div class="meta-label">Lokasi</div>
+            <div class="meta-val">Kompleks City Park, Cengkareng</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JENJANG NAV -->
+  <nav class="jenjang-nav">
+    <a href="tk-pah-tsung.html" class="active">TK</a>
+    <a href="sd-pah-tsung.html">SD</a>
+    <a href="smp-pah-tsung.html">SMP</a>
+    <a href="sma-pah-tsung.html">SMA</a>
+  </nav>
+
+  <!-- OVERVIEW -->
+  <section class="section" id="profil">
+    <div class="section-inner">
+      <span class="section-eyebrow">Profil Jenjang</span>
+      <div class="gold-divider"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+        <div>
+          <h2 class="section-title">Tempat Pertama Cinta Belajar Tumbuh</h2>
+          <p class="section-body">TK Pah Tsung hadir sebagai tempat pertama anak-anak menemukan kegembiraan belajar. Dengan pendekatan bermain sambil belajar (play-based learning), kami membangun fondasi karakter, bahasa, dan kognitif yang kuat sejak usia dini.</p>
+          <p class="section-body">Didampingi oleh guru-guru yang berpengalaman dan penuh kasih sayang, setiap anak di TK Pah Tsung mendapat perhatian individual. Mereka diperkenalkan pada tiga bahasa — Mandarin, Inggris, dan Bahasa Indonesia — secara alami melalui lagu, cerita, permainan, dan aktivitas kreatif sehari-hari.</p>
+          <p class="section-body">Lingkungan belajar yang hangat, aman, dan stimulatif menjadi rumah kedua bagi anak-anak untuk bereksplorasi, bersosialisasi, dan menemukan bakat serta minat mereka sejak dini.</p>
+        </div>
+        <div style="position:relative;">
+          <img src="https://i.ibb.co.com/fz1f8ygx/TK-banner-web.jpg" alt="TK Pah Tsung"
+            style="width:100%;height:400px;object-fit:cover;border-radius:14px;display:block;"/>
+          <div style="position:absolute;bottom:-16px;left:-16px;background:var(--navy);color:var(--white);padding:20px 24px;border-radius:10px;box-shadow:0 8px 32px rgba(13,34,64,0.25);">
+            <div style="font-family:var(--font-display);font-size:32px;font-weight:700;color:var(--gold);line-height:1;">早教</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.65);margin-top:4px;">Early Childhood<br>Education</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISI & MISI -->
+  <section class="section" style="background:var(--off-white);" id="visimisi">
+    <div class="section-inner">
+      <span class="section-eyebrow">Visi & Misi</span>
+      <div class="gold-divider"></div>
+      <h2 class="section-title">Arah & Tujuan TK Pah Tsung</h2>
+      <div class="vision-grid">
+        <div class="vision-card">
+          <div class="vision-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h3>Visi</h3>
+          <p>Menjadi Taman Kanak-Kanak unggulan yang melahirkan generasi berkarakter kuat, cerdas secara emosional, dan mampu berkomunikasi dalam tiga bahasa sejak usia dini dengan penuh percaya diri.</p>
+        </div>
+        <div class="vision-card">
+          <div class="vision-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <h3>Misi</h3>
+          <ul>
+            <li>Memperkenalkan Bahasa Mandarin, Inggris, dan Indonesia sejak usia dini melalui pendekatan bermain yang menyenangkan</li>
+            <li>Membangun fondasi karakter: disiplin, toleran, percaya diri, dan mandiri</li>
+            <li>Menciptakan lingkungan belajar yang aman, hangat, dan stimulatif</li>
+            <li>Melibatkan orang tua sebagai mitra dalam proses tumbuh kembang anak</li>
+            <li>Mengembangkan kecerdasan majemuk melalui aktivitas seni, musik, gerak, dan eksplorasi alam</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KURIKULUM -->
+  <section class="section kurikulum-section" id="kurikulum">
+    <div class="section-inner">
+      <span class="section-eyebrow">Kurikulum</span>
+      <div class="gold-divider"></div>
+      <h2 class="section-title">Program Pembelajaran Kami</h2>
+      <p class="section-body" style="max-width:600px;">TK Pah Tsung mengintegrasikan Kurikulum Merdeka dengan pendekatan holistik yang menyeimbangkan pengembangan akademik, emosional, sosial, dan fisik anak.</p>
+      <div class="kurikulum-grid">
+        <div class="kurikulum-card">
+          <div class="kurikulum-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <h4>Bahasa Mandarin Intensif</h4>
+          <p>Anak-anak belajar Mandarin melalui lagu, cerita bergambar, permainan kata, dan interaksi harian bersama guru yang berpengalaman. Kelas Mandarin dilakukan setiap hari untuk membangun kebiasaan berbahasa sejak dini.</p>
+        </div>
+        <div class="kurikulum-card">
+          <div class="kurikulum-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h4>Bahasa Inggris & Indonesia</h4>
+          <p>Pembelajaran Bahasa Inggris dan Indonesia dilakukan secara terpadu dalam kegiatan sehari-hari. Anak-anak terbiasa berpindah antar bahasa secara alami, membangun kemampuan trilingual yang kuat.</p>
+        </div>
+        <div class="kurikulum-card">
+          <div class="kurikulum-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <h4>Pengembangan Karakter</h4>
+          <p>Nilai-nilai 乐观, 进取, 合作, 奉献 (optimistis, progresif, kooperatif, dedikatif) ditanamkan sejak dini melalui kegiatan sehari-hari, cerita moral, dan pembiasaan sikap yang positif.</p>
+        </div>
+        <div class="kurikulum-card">
+          <div class="kurikulum-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11m0 0H5m4 0h4m6-11v11m0 0h-4m4 0h-4m0 0v4a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-4m8 0H9"/></svg>
+          </div>
+          <h4>Seni, Musik & Gerak</h4>
+          <p>Aktivitas seni lukis, kerajinan tangan, musik, dan gerak kreatif dirancang untuk mengembangkan kecerdasan motorik halus & kasar, kreativitas, serta ekspresi diri anak secara menyenangkan.</p>
+        </div>
+        <div class="kurikulum-card">
+          <div class="kurikulum-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h4>Keterlibatan Orang Tua</h4>
+          <p>Program parenting rutin, laporan perkembangan berkala, dan komunikasi terbuka antara guru dan orang tua memastikan tumbuh kembang anak terpantau dan didukung secara menyeluruh.</p>
+        </div>
+        <div class="kurikulum-card">
+          <div class="kurikulum-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h4>STEAM untuk Anak Usia Dini</h4>
+          <p>Eksplorasi sains sederhana, teknologi edukatif, dan permainan matematis dikenalkan secara fun untuk membangun rasa ingin tahu dan kemampuan berpikir logis sejak usia dini.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEGIATAN -->
+  <section class="section" id="kegiatan">
+    <div class="section-inner">
+      <span class="section-eyebrow">Kegiatan & Ekstrakulikuler</span>
+      <div class="gold-divider"></div>
+      <h2 class="section-title">Hari-Hari yang Penuh Makna di TK Pah Tsung</h2>
+      <div class="activities-grid">
+        <div class="activities-img">
+          <img src="https://i.ibb.co.com/fz1f8ygx/TK-banner-web.jpg" alt="Kegiatan TK"/>
+          <div class="activities-img-badge">
+            <div class="badge-num">3</div>
+            <div class="badge-txt">Bahasa<br>sejak dini</div>
+          </div>
+        </div>
+        <div>
+          <p class="section-body">Setiap hari di TK Pah Tsung dirancang untuk memberikan pengalaman belajar yang menyenangkan, bermakna, dan kaya stimulasi untuk tumbuh kembang optimal si kecil.</p>
+          <ul class="activities-list">
+            <li>
+              <div class="act-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+              <div>
+                <div class="act-title">Mandarin Circle Time</div>
+                <div class="act-desc">Sesi Mandarin interaktif setiap pagi — belajar kosakata, lagu, dan cerita dalam bahasa Mandarin bersama teman dan guru.</div>
+              </div>
+            </li>
+            <li>
+              <div class="act-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div>
+                <div class="act-title">Water Play</div>
+                <div class="act-desc">Bermain air di fasilitas water play eksklusif yang aman dan menyenangkan, mendukung perkembangan motorik dan sosial anak.</div>
+              </div>
+            </li>
+            <li>
+              <div class="act-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+              <div>
+                <div class="act-title">Show & Tell Trilingual</div>
+                <div class="act-desc">Anak-anak berlatih presentasi dalam tiga bahasa, membangun kepercayaan diri dan kemampuan komunikasi publik sejak kecil.</div>
+              </div>
+            </li>
+            <li>
+              <div class="act-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+              <div>
+                <div class="act-title">Perayaan Budaya</div>
+                <div class="act-desc">Perayaan Tahun Baru Imlek, Hari Kemerdekaan, dan hari besar lainnya untuk memperkenalkan keberagaman budaya kepada anak-anak.</div>
+              </div>
+            </li>
+            <li>
+              <div class="act-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+              <div>
+                <div class="act-title">Field Trip Edukatif</div>
+                <div class="act-desc">Kunjungan lapangan ke berbagai tempat menarik untuk memperluas wawasan dan pengalaman belajar anak di luar kelas.</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Bahasa pengantar: Mandarin, Inggris, dan Indonesia</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Program: Nursery, Playgroup & Kindergarten</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">A</div>
+        <div class="stat-label">Akreditasi BAN-S/M — standar terbaik nasional</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">2–6</div>
+        <div class="stat-label">Tahun usia penerimaan siswa baru</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Siap Daftarkan <span>Si Kecil?</span></h2>
+    <p>Bergabunglah bersama ribuan keluarga yang telah mempercayakan pendidikan anak mereka kepada Pah Tsung School.</p>
+    <div class="cta-buttons">
+      <a href="https://www.ppdb.pahtsung.sch.id" target="_blank" class="btn-primary">Daftar Sekarang</a>
+      <a href="https://wa.me/6281291669809" target="_blank" class="btn-outline">Hubungi Kami</a>
+    </div>
+  </section>
+
+  <!-- OTHER LEVELS -->
+  <section class="section other-levels">
+    <div class="section-inner">
+      <span class="section-eyebrow">Jenjang Lainnya</span>
+      <div class="gold-divider"></div>
+      <h2 class="section-title">Satu Atap untuk Semua Jenjang</h2>
+      <div class="other-levels-grid">
+        <a href="sd-pah-tsung.html" class="other-card">
+          <img src="https://i.ibb.co.com/0yXN0vDB/DSC-3494.jpg" alt="SD Pah Tsung"/>
+          <div class="other-card-body">
+            <span class="other-card-grade">Kelas 1 – 6</span>
+            <h4>SD Pah Tsung</h4>
+            <p>Membangun kompetensi akademik trilingual yang kuat dengan Kurikulum Merdeka.</p>
+          </div>
+        </a>
+        <a href="smp-pah-tsung.html" class="other-card">
+          <img src="https://i.ibb.co.com/C3DWH8dr/L1370753.jpg" alt="SMP Pah Tsung"/>
+          <div class="other-card-body">
+            <span class="other-card-grade">Kelas 7 – 9</span>
+            <h4>SMP Pah Tsung</h4>
+            <p>Mandarin semakin diasah bersama guru native speaker. Membangun kemandirian dan percaya diri.</p>
+          </div>
+        </a>
+        <a href="sma-pah-tsung.html" class="other-card">
+          <img src="https://i.ibb.co.com/q3zrP7GW/DSCF5296.jpg" alt="SMA Pah Tsung"/>
+          <div class="other-card-body">
+            <span class="other-card-grade">Kelas 10 – 12</span>
+            <h4>SMA Pah Tsung</h4>
+            <p>Lulusan siap melanjutkan ke universitas terbaik di Indonesia maupun Tiongkok.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <img src="https://i.ibb.co.com/1fMy5VXb/logo-Pah-Tsung-text-biru-utk-video.png" alt="Pah Tsung" style="filter:brightness(10);"/>
+        </div>
+        <p class="footer-desc">Sekolah trilingual terkemuka di Jakarta Barat — membentuk generasi yang optimistis, progresif, kooperatif, dan dedikatif.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Jenjang</h5>
+        <ul>
+          <li><a href="tk-pah-tsung.html">TK Pah Tsung</a></li>
+          <li><a href="sd-pah-tsung.html">SD Pah Tsung</a></li>
+          <li><a href="smp-pah-tsung.html">SMP Pah Tsung</a></li>
+          <li><a href="sma-pah-tsung.html">SMA Pah Tsung</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Informasi</h5>
+        <ul>
+          <li><a href="index.html#tentang">Tentang Kami</a></li>
+          <li><a href="index.html#kampus">Fasilitas</a></li>
+          <li><a href="index.html#testimoni">Testimoni</a></li>
+          <li><a href="https://www.ppdb.pahtsung.sch.id">PPDB Online</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Kontak</h5>
+        <ul>
+          <li><a href="tel:02122522239">021-22522239</a></li>
+          <li><a href="https://wa.me/6281291669809">WhatsApp PPDB</a></li>
+          <li><a href="mailto:info@pahtsung.sch.id">info@pahtsung.sch.id</a></li>
+          <li><a href="#">City Park Blok A4, Cengkareng</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Sekolah Pah Tsung. All rights reserved.</span>
+      <span>Trilingual · Berkarakter · Berprestasi</span>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+    });
+  </script>
+</body>
+</html>
