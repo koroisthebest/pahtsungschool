@@ -339,6 +339,26 @@
       .jenjang-hero-content { padding: 40px 24px 60px; }
       .section { padding: 60px 24px; }
       .vision-grid, .kurikulum-grid, .activities-grid, .stats-inner, .other-levels-grid { grid-template-columns: 1fr; }
+
+      /* Profil Jenjang Mobile Layout */
+      #profil .section-inner > div {
+        display: flex !important;
+        flex-direction: column;
+        gap: 32px !important;
+      }
+
+      #profil .section-inner > div > div:first-child {
+        order: 1;
+      }
+
+      #profil .section-inner > div > div:last-child {
+        order: 2;
+      }
+
+      #profil img {
+        height: 340px !important;
+      }
+
       .jenjang-nav { padding: 0 24px; }
       .stats-row { padding: 48px 24px; }
       .cta-section { padding: 60px 24px; }
